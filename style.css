@@ -25,6 +25,7 @@ input[name='slide'] {
 }
 
 .slide-container {
+  display: flex;
   overflow: hidden;
   width: 100%;
   max-width: 50rem;
@@ -33,21 +34,19 @@ input[name='slide'] {
   box-shadow: inset 2px 0 4px 1px rgba(0, 0, 0, 0.2);
 }
 
-
 .slide {
-  float: left;
-  height: 100%;
-  transition: width .5s .1s ease;
+  display: flex;
+  flex-shrink: 0;
+  transition: width 0.5s 0.1s ease;
 }
 
 .slide-tab {
   display: flex;
   justify-content: center;
   align-items: center;
-  float: left;
+  flex-shrink: 0;
   position: relative;
   width: 2.5rem;
-  height: 100%;
   background-color: #2286c3;
   box-shadow: inset 0 0 5px 1px rgba(0, 0, 0, 0.4);
   cursor: pointer;
@@ -72,9 +71,7 @@ input[name='slide'] {
 
 .slide-content {
   overflow: hidden;
-  float: left;
-  height: 100%;
-  transition: width .5s .1s ease;
+  transition: width 0.5s 0.1s ease;
 }
 
 .slide-content dt {
@@ -108,6 +105,11 @@ input[name='slide']:not(:checked) + .slide {
   width: 2.5rem;
 }
 
+input[name='slide']:checked + .slide .slide-tab strong:after,
+.slide-tab:hover strong:after {
+  opacity: 1;
+}
+
 input[name='slide']:checked + .slide .slide-content {
   width: calc(100% - 2.5rem);
   padding: 1.4rem;
@@ -115,11 +117,6 @@ input[name='slide']:checked + .slide .slide-content {
 
 input[name='slide']:not(:checked) + .slide .slide-content {
   width: 0;
-}
-
-input[name='slide']:checked + .slide .slide-tab strong:after,
-.slide-tab:hover strong:after {
-  opacity: 1;
 }
 
 input[name='slide']:checked + .slide .slide-content dt,
@@ -136,21 +133,23 @@ input[name='slide']:checked + .slide .slide-content dd {
 }
 
 @media (max-width: 556px) {
+  .onlyPC {
+    display: none;
+  }
+
   .slide-container {
+    flex-direction: column;
     height: auto;
     box-shadow: inset 0 0 3px 1px rgba(0, 0, 0, 0.2);
   }
 
-
   .slide {
-    float: none;
+    flex-direction: column;
     width: 100% !important;
-    height: auto;
     transition: none;
   }
 
   .slide-tab {
-    float: none;
     width: 100%;
     height: 2.5rem;
     box-shadow: inset 0 0 4px 1px rgba(0, 0, 0, 0.3);
@@ -161,20 +160,17 @@ input[name='slide']:checked + .slide .slide-content dd {
   }
 
   .slide-tab strong:after {
-    margin-top: 0;
-    margin-left: .6rem;
+    margin: 0 0 0 0.6rem;
   }
 
   .slide-content {
-    float: none;
     width: 100% !important;
-    height: auto;
     max-height: 0;
-    transition: max-height .5s .1s ease, padding .5s .1s ease;
+    transition: max-height 0.5s 0.1s ease, padding 0.5s 0.1s ease;
   }
 
   /* checked  */
   input[name='slide']:checked + .slide .slide-content {
-    max-height: 20rem;
+    max-height: 14rem;
   }
 }
